@@ -1,0 +1,21 @@
+{
+  "name": "aws-wasm-checksums",
+  "version": "1.0.0",
+  "description": "WASM implementations of checksums used by the AWS SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest --run",
+    "build-js-bindings": "cargo component build --release && npx jco transpile ./target/wasm32-wasip1/release/aws_wasm_checksums.wasm -o ./js-bindings/ --no-namespaced-exports",
+    "build": "npm run build-js-bindings"
+  },
+  "author": "landonxjames",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.9.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  },
+  "dependencies": {
+    "@types/node": "^22.13.4"
+  }
+}
