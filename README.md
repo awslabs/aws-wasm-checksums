@@ -1,6 +1,6 @@
 ## AWS WASM Checksums
 
-WASM mplementations of the checksums supported by the [Smithy httpChecksum trait](https://smithy.io/2.0/aws/aws-core.html#aws-protocols-httpchecksum-trait). The WASM implementation are based on the [WASM component model](https://component-model.bytecodealliance.org/).
+WASM implementations of the checksums supported by the [Smithy httpChecksum trait](https://smithy.io/2.0/aws/aws-core.html#aws-protocols-httpchecksum-trait). The WASM implementation are based on the [WASM component model](https://component-model.bytecodealliance.org/).
 
 ## Working with this REPO
 
