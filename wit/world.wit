@@ -4,7 +4,8 @@ interface crc64-nvme-hasher {
     resource hasher {
         constructor();
         update: func(input: list<u8>);
-        finalize: func() -> u64;
+        finalize: func() -> list<u8>;
+        finalize-and-encode: func() -> string;
         reset: func();
     }
 }
@@ -13,7 +14,8 @@ interface crc32-hasher {
     resource hasher {
         constructor();
         update: func(input: list<u8>);
-        finalize: func() -> u32;
+        finalize: func() -> list<u8>;
+        finalize-and-encode: func() -> string;
         reset: func();
     }
 }
@@ -22,7 +24,8 @@ interface crc32c-hasher {
     resource hasher {
         constructor();
         update: func(input: list<u8>);
-        finalize: func() -> u32;
+        finalize: func() -> list<u8>;
+        finalize-and-encode: func() -> string;
         reset: func();
     }
 }
@@ -33,11 +36,14 @@ interface crc32c-hasher {
 /// will calculate a one time value for that checksum.   
 world checksums {
     export crc64-nvme-hasher;
-    export crc64-nvme-hash: func(input: list<u8>) -> u64;
+    export crc64-nvme-hash: func(input: list<u8>) -> list<u8>;
+    export crc64-nvme-hash-and-encode: func(input: list<u8>) -> string;
 
     export crc32-hasher;
-    export crc32-hash: func(input: list<u8>) -> u32;
+    export crc32-hash: func(input: list<u8>) -> list<u8>;
+    export crc32-hash-and-encode: func(input: list<u8>) -> string;
 
     export crc32c-hasher;
-    export crc32c-hash: func(input: list<u8>) -> u32;
+    export crc32c-hash: func(input: list<u8>) -> list<u8>;
+    export crc32c-hash-and-encode: func(input: list<u8>) -> string;
 }
