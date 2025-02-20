@@ -20,5 +20,7 @@ jobs:
         run: npm install && cargo install cargo-component
       - name: Building Rust code and JS bindings
         run: npm run build
+      - name: Linting Rust code
+        run: cargo clippy -- -D warnings
       - name: Testing JS bindings
         run: npm run test
