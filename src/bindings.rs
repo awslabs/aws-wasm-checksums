@@ -157,6 +157,108 @@ pub unsafe fn __post_return_crc32c_hash_and_encode<T: Guest>(arg0: *mut u8) {
     let l1 = *arg0.add(4).cast::<usize>();
     _rt::cabi_dealloc(l0, l1, 1);
 }
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn _export_sha256_hash_cabi<T: Guest>(arg0: *mut u8, arg1: usize) -> *mut u8 {
+    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+    let len0 = arg1;
+    let result1 = T::sha256_hash(_rt::Vec::from_raw_parts(arg0.cast(), len0, len0));
+    let ptr2 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+    let vec3 = (result1).into_boxed_slice();
+    let ptr3 = vec3.as_ptr().cast::<u8>();
+    let len3 = vec3.len();
+    ::core::mem::forget(vec3);
+    *ptr2.add(4).cast::<usize>() = len3;
+    *ptr2.add(0).cast::<*mut u8>() = ptr3.cast_mut();
+    ptr2
+}
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn __post_return_sha256_hash<T: Guest>(arg0: *mut u8) {
+    let l0 = *arg0.add(0).cast::<*mut u8>();
+    let l1 = *arg0.add(4).cast::<usize>();
+    let base2 = l0;
+    let len2 = l1;
+    _rt::cabi_dealloc(base2, len2 * 1, 1);
+}
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn _export_sha256_hash_and_encode_cabi<T: Guest>(
+    arg0: *mut u8,
+    arg1: usize,
+) -> *mut u8 {
+    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+    let len0 = arg1;
+    let result1 = T::sha256_hash_and_encode(
+        _rt::Vec::from_raw_parts(arg0.cast(), len0, len0),
+    );
+    let ptr2 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+    let vec3 = (result1.into_bytes()).into_boxed_slice();
+    let ptr3 = vec3.as_ptr().cast::<u8>();
+    let len3 = vec3.len();
+    ::core::mem::forget(vec3);
+    *ptr2.add(4).cast::<usize>() = len3;
+    *ptr2.add(0).cast::<*mut u8>() = ptr3.cast_mut();
+    ptr2
+}
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn __post_return_sha256_hash_and_encode<T: Guest>(arg0: *mut u8) {
+    let l0 = *arg0.add(0).cast::<*mut u8>();
+    let l1 = *arg0.add(4).cast::<usize>();
+    _rt::cabi_dealloc(l0, l1, 1);
+}
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn _export_sha1_hash_cabi<T: Guest>(arg0: *mut u8, arg1: usize) -> *mut u8 {
+    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+    let len0 = arg1;
+    let result1 = T::sha1_hash(_rt::Vec::from_raw_parts(arg0.cast(), len0, len0));
+    let ptr2 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+    let vec3 = (result1).into_boxed_slice();
+    let ptr3 = vec3.as_ptr().cast::<u8>();
+    let len3 = vec3.len();
+    ::core::mem::forget(vec3);
+    *ptr2.add(4).cast::<usize>() = len3;
+    *ptr2.add(0).cast::<*mut u8>() = ptr3.cast_mut();
+    ptr2
+}
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn __post_return_sha1_hash<T: Guest>(arg0: *mut u8) {
+    let l0 = *arg0.add(0).cast::<*mut u8>();
+    let l1 = *arg0.add(4).cast::<usize>();
+    let base2 = l0;
+    let len2 = l1;
+    _rt::cabi_dealloc(base2, len2 * 1, 1);
+}
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn _export_sha1_hash_and_encode_cabi<T: Guest>(
+    arg0: *mut u8,
+    arg1: usize,
+) -> *mut u8 {
+    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+    let len0 = arg1;
+    let result1 = T::sha1_hash_and_encode(
+        _rt::Vec::from_raw_parts(arg0.cast(), len0, len0),
+    );
+    let ptr2 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+    let vec3 = (result1.into_bytes()).into_boxed_slice();
+    let ptr3 = vec3.as_ptr().cast::<u8>();
+    let len3 = vec3.len();
+    ::core::mem::forget(vec3);
+    *ptr2.add(4).cast::<usize>() = len3;
+    *ptr2.add(0).cast::<*mut u8>() = ptr3.cast_mut();
+    ptr2
+}
+#[doc(hidden)]
+#[allow(non_snake_case)]
+pub unsafe fn __post_return_sha1_hash_and_encode<T: Guest>(arg0: *mut u8) {
+    let l0 = *arg0.add(0).cast::<*mut u8>();
+    let l1 = *arg0.add(4).cast::<usize>();
+    _rt::cabi_dealloc(l0, l1, 1);
+}
 pub trait Guest {
     fn crc64_nvme_hash(input: _rt::Vec<u8>) -> _rt::Vec<u8>;
     fn crc64_nvme_hash_and_encode(input: _rt::Vec<u8>) -> _rt::String;
@@ -164,6 +266,10 @@ pub trait Guest {
     fn crc32_hash_and_encode(input: _rt::Vec<u8>) -> _rt::String;
     fn crc32c_hash(input: _rt::Vec<u8>) -> _rt::Vec<u8>;
     fn crc32c_hash_and_encode(input: _rt::Vec<u8>) -> _rt::String;
+    fn sha256_hash(input: _rt::Vec<u8>) -> _rt::Vec<u8>;
+    fn sha256_hash_and_encode(input: _rt::Vec<u8>) -> _rt::String;
+    fn sha1_hash(input: _rt::Vec<u8>) -> _rt::Vec<u8>;
+    fn sha1_hash_and_encode(input: _rt::Vec<u8>) -> _rt::String;
 }
 #[doc(hidden)]
 macro_rules! __export_world_checksums_cabi {
@@ -201,7 +307,28 @@ macro_rules! __export_world_checksums_cabi {
         _export_crc32c_hash_and_encode_cabi::<$ty > (arg0, arg1) } #[export_name =
         "cabi_post_crc32c-hash-and-encode"] unsafe extern "C" fn
         _post_return_crc32c_hash_and_encode(arg0 : * mut u8,) { $($path_to_types)*::
-        __post_return_crc32c_hash_and_encode::<$ty > (arg0) } };
+        __post_return_crc32c_hash_and_encode::<$ty > (arg0) } #[export_name =
+        "sha256-hash"] unsafe extern "C" fn export_sha256_hash(arg0 : * mut u8, arg1 :
+        usize,) -> * mut u8 { $($path_to_types)*:: _export_sha256_hash_cabi::<$ty >
+        (arg0, arg1) } #[export_name = "cabi_post_sha256-hash"] unsafe extern "C" fn
+        _post_return_sha256_hash(arg0 : * mut u8,) { $($path_to_types)*::
+        __post_return_sha256_hash::<$ty > (arg0) } #[export_name =
+        "sha256-hash-and-encode"] unsafe extern "C" fn export_sha256_hash_and_encode(arg0
+        : * mut u8, arg1 : usize,) -> * mut u8 { $($path_to_types)*::
+        _export_sha256_hash_and_encode_cabi::<$ty > (arg0, arg1) } #[export_name =
+        "cabi_post_sha256-hash-and-encode"] unsafe extern "C" fn
+        _post_return_sha256_hash_and_encode(arg0 : * mut u8,) { $($path_to_types)*::
+        __post_return_sha256_hash_and_encode::<$ty > (arg0) } #[export_name =
+        "sha1-hash"] unsafe extern "C" fn export_sha1_hash(arg0 : * mut u8, arg1 :
+        usize,) -> * mut u8 { $($path_to_types)*:: _export_sha1_hash_cabi::<$ty > (arg0,
+        arg1) } #[export_name = "cabi_post_sha1-hash"] unsafe extern "C" fn
+        _post_return_sha1_hash(arg0 : * mut u8,) { $($path_to_types)*::
+        __post_return_sha1_hash::<$ty > (arg0) } #[export_name = "sha1-hash-and-encode"]
+        unsafe extern "C" fn export_sha1_hash_and_encode(arg0 : * mut u8, arg1 : usize,)
+        -> * mut u8 { $($path_to_types)*:: _export_sha1_hash_and_encode_cabi::<$ty >
+        (arg0, arg1) } #[export_name = "cabi_post_sha1-hash-and-encode"] unsafe extern
+        "C" fn _post_return_sha1_hash_and_encode(arg0 : * mut u8,) { $($path_to_types)*::
+        __post_return_sha1_hash_and_encode::<$ty > (arg0) } };
     };
 }
 #[doc(hidden)]
@@ -1174,6 +1301,646 @@ pub mod exports {
                     [::core::mem::MaybeUninit::uninit(); 8],
                 );
             }
+            #[allow(dead_code, clippy::all)]
+            pub mod sha256_hasher {
+                #[used]
+                #[doc(hidden)]
+                static __FORCE_SECTION_REF: fn() = super::super::super::super::__link_custom_section_describing_imports;
+                use super::super::super::super::_rt;
+                #[derive(Debug)]
+                #[repr(transparent)]
+                pub struct Hasher {
+                    handle: _rt::Resource<Hasher>,
+                }
+                type _HasherRep<T> = Option<T>;
+                impl Hasher {
+                    /// Creates a new resource from the specified representation.
+                    ///
+                    /// This function will create a new resource handle by moving `val` onto
+                    /// the heap and then passing that heap pointer to the component model to
+                    /// create a handle. The owned handle is then returned as `Hasher`.
+                    pub fn new<T: GuestHasher>(val: T) -> Self {
+                        Self::type_guard::<T>();
+                        let val: _HasherRep<T> = Some(val);
+                        let ptr: *mut _HasherRep<T> = _rt::Box::into_raw(
+                            _rt::Box::new(val),
+                        );
+                        unsafe { Self::from_handle(T::_resource_new(ptr.cast())) }
+                    }
+                    /// Gets access to the underlying `T` which represents this resource.
+                    pub fn get<T: GuestHasher>(&self) -> &T {
+                        let ptr = unsafe { &*self.as_ptr::<T>() };
+                        ptr.as_ref().unwrap()
+                    }
+                    /// Gets mutable access to the underlying `T` which represents this
+                    /// resource.
+                    pub fn get_mut<T: GuestHasher>(&mut self) -> &mut T {
+                        let ptr = unsafe { &mut *self.as_ptr::<T>() };
+                        ptr.as_mut().unwrap()
+                    }
+                    /// Consumes this resource and returns the underlying `T`.
+                    pub fn into_inner<T: GuestHasher>(self) -> T {
+                        let ptr = unsafe { &mut *self.as_ptr::<T>() };
+                        ptr.take().unwrap()
+                    }
+                    #[doc(hidden)]
+                    pub unsafe fn from_handle(handle: u32) -> Self {
+                        Self {
+                            handle: _rt::Resource::from_handle(handle),
+                        }
+                    }
+                    #[doc(hidden)]
+                    pub fn take_handle(&self) -> u32 {
+                        _rt::Resource::take_handle(&self.handle)
+                    }
+                    #[doc(hidden)]
+                    pub fn handle(&self) -> u32 {
+                        _rt::Resource::handle(&self.handle)
+                    }
+                    #[doc(hidden)]
+                    fn type_guard<T: 'static>() {
+                        use core::any::TypeId;
+                        static mut LAST_TYPE: Option<TypeId> = None;
+                        unsafe {
+                            assert!(! cfg!(target_feature = "atomics"));
+                            let id = TypeId::of::<T>();
+                            match LAST_TYPE {
+                                Some(ty) => {
+                                    assert!(
+                                        ty == id, "cannot use two types with this resource type"
+                                    )
+                                }
+                                None => LAST_TYPE = Some(id),
+                            }
+                        }
+                    }
+                    #[doc(hidden)]
+                    pub unsafe fn dtor<T: 'static>(handle: *mut u8) {
+                        Self::type_guard::<T>();
+                        let _ = _rt::Box::from_raw(handle as *mut _HasherRep<T>);
+                    }
+                    fn as_ptr<T: GuestHasher>(&self) -> *mut _HasherRep<T> {
+                        Hasher::type_guard::<T>();
+                        T::_resource_rep(self.handle()).cast()
+                    }
+                }
+                /// A borrowed version of [`Hasher`] which represents a borrowed value
+                /// with the lifetime `'a`.
+                #[derive(Debug)]
+                #[repr(transparent)]
+                pub struct HasherBorrow<'a> {
+                    rep: *mut u8,
+                    _marker: core::marker::PhantomData<&'a Hasher>,
+                }
+                impl<'a> HasherBorrow<'a> {
+                    #[doc(hidden)]
+                    pub unsafe fn lift(rep: usize) -> Self {
+                        Self {
+                            rep: rep as *mut u8,
+                            _marker: core::marker::PhantomData,
+                        }
+                    }
+                    /// Gets access to the underlying `T` in this resource.
+                    pub fn get<T: GuestHasher>(&self) -> &T {
+                        let ptr = unsafe { &mut *self.as_ptr::<T>() };
+                        ptr.as_ref().unwrap()
+                    }
+                    fn as_ptr<T: 'static>(&self) -> *mut _HasherRep<T> {
+                        Hasher::type_guard::<T>();
+                        self.rep.cast()
+                    }
+                }
+                unsafe impl _rt::WasmResource for Hasher {
+                    #[inline]
+                    unsafe fn drop(_handle: u32) {
+                        #[cfg(not(target_arch = "wasm32"))]
+                        unreachable!();
+                        #[cfg(target_arch = "wasm32")]
+                        {
+                            #[link(
+                                wasm_import_module = "[export]component:aws-wasm-checksums/sha256-hasher"
+                            )]
+                            extern "C" {
+                                #[link_name = "[resource-drop]hasher"]
+                                fn drop(_: u32);
+                            }
+                            drop(_handle);
+                        }
+                    }
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_constructor_hasher_cabi<T: GuestHasher>() -> i32 {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let result0 = Hasher::new(T::new());
+                    (result0).take_handle() as i32
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_update_cabi<T: GuestHasher>(
+                    arg0: *mut u8,
+                    arg1: *mut u8,
+                    arg2: usize,
+                ) {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let len0 = arg2;
+                    T::update(
+                        HasherBorrow::lift(arg0 as u32 as usize).get(),
+                        _rt::Vec::from_raw_parts(arg1.cast(), len0, len0),
+                    );
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_finalize_cabi<T: GuestHasher>(
+                    arg0: *mut u8,
+                ) -> *mut u8 {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let result0 = T::finalize(
+                        HasherBorrow::lift(arg0 as u32 as usize).get(),
+                    );
+                    let ptr1 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+                    let vec2 = (result0).into_boxed_slice();
+                    let ptr2 = vec2.as_ptr().cast::<u8>();
+                    let len2 = vec2.len();
+                    ::core::mem::forget(vec2);
+                    *ptr1.add(4).cast::<usize>() = len2;
+                    *ptr1.add(0).cast::<*mut u8>() = ptr2.cast_mut();
+                    ptr1
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn __post_return_method_hasher_finalize<T: GuestHasher>(
+                    arg0: *mut u8,
+                ) {
+                    let l0 = *arg0.add(0).cast::<*mut u8>();
+                    let l1 = *arg0.add(4).cast::<usize>();
+                    let base2 = l0;
+                    let len2 = l1;
+                    _rt::cabi_dealloc(base2, len2 * 1, 1);
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_finalize_and_encode_cabi<
+                    T: GuestHasher,
+                >(arg0: *mut u8) -> *mut u8 {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let result0 = T::finalize_and_encode(
+                        HasherBorrow::lift(arg0 as u32 as usize).get(),
+                    );
+                    let ptr1 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+                    let vec2 = (result0.into_bytes()).into_boxed_slice();
+                    let ptr2 = vec2.as_ptr().cast::<u8>();
+                    let len2 = vec2.len();
+                    ::core::mem::forget(vec2);
+                    *ptr1.add(4).cast::<usize>() = len2;
+                    *ptr1.add(0).cast::<*mut u8>() = ptr2.cast_mut();
+                    ptr1
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn __post_return_method_hasher_finalize_and_encode<
+                    T: GuestHasher,
+                >(arg0: *mut u8) {
+                    let l0 = *arg0.add(0).cast::<*mut u8>();
+                    let l1 = *arg0.add(4).cast::<usize>();
+                    _rt::cabi_dealloc(l0, l1, 1);
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_reset_cabi<T: GuestHasher>(
+                    arg0: *mut u8,
+                ) {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    T::reset(HasherBorrow::lift(arg0 as u32 as usize).get());
+                }
+                pub trait Guest {
+                    type Hasher: GuestHasher;
+                }
+                pub trait GuestHasher: 'static {
+                    #[doc(hidden)]
+                    unsafe fn _resource_new(val: *mut u8) -> u32
+                    where
+                        Self: Sized,
+                    {
+                        #[cfg(not(target_arch = "wasm32"))]
+                        {
+                            let _ = val;
+                            unreachable!();
+                        }
+                        #[cfg(target_arch = "wasm32")]
+                        {
+                            #[link(
+                                wasm_import_module = "[export]component:aws-wasm-checksums/sha256-hasher"
+                            )]
+                            extern "C" {
+                                #[link_name = "[resource-new]hasher"]
+                                fn new(_: *mut u8) -> u32;
+                            }
+                            new(val)
+                        }
+                    }
+                    #[doc(hidden)]
+                    fn _resource_rep(handle: u32) -> *mut u8
+                    where
+                        Self: Sized,
+                    {
+                        #[cfg(not(target_arch = "wasm32"))]
+                        {
+                            let _ = handle;
+                            unreachable!();
+                        }
+                        #[cfg(target_arch = "wasm32")]
+                        {
+                            #[link(
+                                wasm_import_module = "[export]component:aws-wasm-checksums/sha256-hasher"
+                            )]
+                            extern "C" {
+                                #[link_name = "[resource-rep]hasher"]
+                                fn rep(_: u32) -> *mut u8;
+                            }
+                            unsafe { rep(handle) }
+                        }
+                    }
+                    fn new() -> Self;
+                    fn update(&self, input: _rt::Vec<u8>);
+                    fn finalize(&self) -> _rt::Vec<u8>;
+                    fn finalize_and_encode(&self) -> _rt::String;
+                    fn reset(&self);
+                }
+                #[doc(hidden)]
+                macro_rules! __export_component_aws_wasm_checksums_sha256_hasher_cabi {
+                    ($ty:ident with_types_in $($path_to_types:tt)*) => {
+                        const _ : () = { #[export_name =
+                        "component:aws-wasm-checksums/sha256-hasher#[constructor]hasher"]
+                        unsafe extern "C" fn export_constructor_hasher() -> i32 {
+                        $($path_to_types)*:: _export_constructor_hasher_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > () } #[export_name =
+                        "component:aws-wasm-checksums/sha256-hasher#[method]hasher.update"]
+                        unsafe extern "C" fn export_method_hasher_update(arg0 : * mut u8,
+                        arg1 : * mut u8, arg2 : usize,) { $($path_to_types)*::
+                        _export_method_hasher_update_cabi::<<$ty as $($path_to_types)*::
+                        Guest >::Hasher > (arg0, arg1, arg2) } #[export_name =
+                        "component:aws-wasm-checksums/sha256-hasher#[method]hasher.finalize"]
+                        unsafe extern "C" fn export_method_hasher_finalize(arg0 : * mut
+                        u8,) -> * mut u8 { $($path_to_types)*::
+                        _export_method_hasher_finalize_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "cabi_post_component:aws-wasm-checksums/sha256-hasher#[method]hasher.finalize"]
+                        unsafe extern "C" fn _post_return_method_hasher_finalize(arg0 : *
+                        mut u8,) { $($path_to_types)*::
+                        __post_return_method_hasher_finalize::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "component:aws-wasm-checksums/sha256-hasher#[method]hasher.finalize-and-encode"]
+                        unsafe extern "C" fn
+                        export_method_hasher_finalize_and_encode(arg0 : * mut u8,) -> *
+                        mut u8 { $($path_to_types)*::
+                        _export_method_hasher_finalize_and_encode_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "cabi_post_component:aws-wasm-checksums/sha256-hasher#[method]hasher.finalize-and-encode"]
+                        unsafe extern "C" fn
+                        _post_return_method_hasher_finalize_and_encode(arg0 : * mut u8,)
+                        { $($path_to_types)*::
+                        __post_return_method_hasher_finalize_and_encode::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "component:aws-wasm-checksums/sha256-hasher#[method]hasher.reset"]
+                        unsafe extern "C" fn export_method_hasher_reset(arg0 : * mut u8,)
+                        { $($path_to_types)*:: _export_method_hasher_reset_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } const _ : () = {
+                        #[doc(hidden)] #[export_name =
+                        "component:aws-wasm-checksums/sha256-hasher#[dtor]hasher"]
+                        #[allow(non_snake_case)] unsafe extern "C" fn dtor(rep : * mut
+                        u8) { $($path_to_types)*:: Hasher::dtor::< <$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (rep) } }; };
+                    };
+                }
+                #[doc(hidden)]
+                pub(crate) use __export_component_aws_wasm_checksums_sha256_hasher_cabi;
+                #[repr(align(4))]
+                struct _RetArea([::core::mem::MaybeUninit<u8>; 8]);
+                static mut _RET_AREA: _RetArea = _RetArea(
+                    [::core::mem::MaybeUninit::uninit(); 8],
+                );
+            }
+            #[allow(dead_code, clippy::all)]
+            pub mod sha1_hasher {
+                #[used]
+                #[doc(hidden)]
+                static __FORCE_SECTION_REF: fn() = super::super::super::super::__link_custom_section_describing_imports;
+                use super::super::super::super::_rt;
+                #[derive(Debug)]
+                #[repr(transparent)]
+                pub struct Hasher {
+                    handle: _rt::Resource<Hasher>,
+                }
+                type _HasherRep<T> = Option<T>;
+                impl Hasher {
+                    /// Creates a new resource from the specified representation.
+                    ///
+                    /// This function will create a new resource handle by moving `val` onto
+                    /// the heap and then passing that heap pointer to the component model to
+                    /// create a handle. The owned handle is then returned as `Hasher`.
+                    pub fn new<T: GuestHasher>(val: T) -> Self {
+                        Self::type_guard::<T>();
+                        let val: _HasherRep<T> = Some(val);
+                        let ptr: *mut _HasherRep<T> = _rt::Box::into_raw(
+                            _rt::Box::new(val),
+                        );
+                        unsafe { Self::from_handle(T::_resource_new(ptr.cast())) }
+                    }
+                    /// Gets access to the underlying `T` which represents this resource.
+                    pub fn get<T: GuestHasher>(&self) -> &T {
+                        let ptr = unsafe { &*self.as_ptr::<T>() };
+                        ptr.as_ref().unwrap()
+                    }
+                    /// Gets mutable access to the underlying `T` which represents this
+                    /// resource.
+                    pub fn get_mut<T: GuestHasher>(&mut self) -> &mut T {
+                        let ptr = unsafe { &mut *self.as_ptr::<T>() };
+                        ptr.as_mut().unwrap()
+                    }
+                    /// Consumes this resource and returns the underlying `T`.
+                    pub fn into_inner<T: GuestHasher>(self) -> T {
+                        let ptr = unsafe { &mut *self.as_ptr::<T>() };
+                        ptr.take().unwrap()
+                    }
+                    #[doc(hidden)]
+                    pub unsafe fn from_handle(handle: u32) -> Self {
+                        Self {
+                            handle: _rt::Resource::from_handle(handle),
+                        }
+                    }
+                    #[doc(hidden)]
+                    pub fn take_handle(&self) -> u32 {
+                        _rt::Resource::take_handle(&self.handle)
+                    }
+                    #[doc(hidden)]
+                    pub fn handle(&self) -> u32 {
+                        _rt::Resource::handle(&self.handle)
+                    }
+                    #[doc(hidden)]
+                    fn type_guard<T: 'static>() {
+                        use core::any::TypeId;
+                        static mut LAST_TYPE: Option<TypeId> = None;
+                        unsafe {
+                            assert!(! cfg!(target_feature = "atomics"));
+                            let id = TypeId::of::<T>();
+                            match LAST_TYPE {
+                                Some(ty) => {
+                                    assert!(
+                                        ty == id, "cannot use two types with this resource type"
+                                    )
+                                }
+                                None => LAST_TYPE = Some(id),
+                            }
+                        }
+                    }
+                    #[doc(hidden)]
+                    pub unsafe fn dtor<T: 'static>(handle: *mut u8) {
+                        Self::type_guard::<T>();
+                        let _ = _rt::Box::from_raw(handle as *mut _HasherRep<T>);
+                    }
+                    fn as_ptr<T: GuestHasher>(&self) -> *mut _HasherRep<T> {
+                        Hasher::type_guard::<T>();
+                        T::_resource_rep(self.handle()).cast()
+                    }
+                }
+                /// A borrowed version of [`Hasher`] which represents a borrowed value
+                /// with the lifetime `'a`.
+                #[derive(Debug)]
+                #[repr(transparent)]
+                pub struct HasherBorrow<'a> {
+                    rep: *mut u8,
+                    _marker: core::marker::PhantomData<&'a Hasher>,
+                }
+                impl<'a> HasherBorrow<'a> {
+                    #[doc(hidden)]
+                    pub unsafe fn lift(rep: usize) -> Self {
+                        Self {
+                            rep: rep as *mut u8,
+                            _marker: core::marker::PhantomData,
+                        }
+                    }
+                    /// Gets access to the underlying `T` in this resource.
+                    pub fn get<T: GuestHasher>(&self) -> &T {
+                        let ptr = unsafe { &mut *self.as_ptr::<T>() };
+                        ptr.as_ref().unwrap()
+                    }
+                    fn as_ptr<T: 'static>(&self) -> *mut _HasherRep<T> {
+                        Hasher::type_guard::<T>();
+                        self.rep.cast()
+                    }
+                }
+                unsafe impl _rt::WasmResource for Hasher {
+                    #[inline]
+                    unsafe fn drop(_handle: u32) {
+                        #[cfg(not(target_arch = "wasm32"))]
+                        unreachable!();
+                        #[cfg(target_arch = "wasm32")]
+                        {
+                            #[link(
+                                wasm_import_module = "[export]component:aws-wasm-checksums/sha1-hasher"
+                            )]
+                            extern "C" {
+                                #[link_name = "[resource-drop]hasher"]
+                                fn drop(_: u32);
+                            }
+                            drop(_handle);
+                        }
+                    }
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_constructor_hasher_cabi<T: GuestHasher>() -> i32 {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let result0 = Hasher::new(T::new());
+                    (result0).take_handle() as i32
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_update_cabi<T: GuestHasher>(
+                    arg0: *mut u8,
+                    arg1: *mut u8,
+                    arg2: usize,
+                ) {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let len0 = arg2;
+                    T::update(
+                        HasherBorrow::lift(arg0 as u32 as usize).get(),
+                        _rt::Vec::from_raw_parts(arg1.cast(), len0, len0),
+                    );
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_finalize_cabi<T: GuestHasher>(
+                    arg0: *mut u8,
+                ) -> *mut u8 {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let result0 = T::finalize(
+                        HasherBorrow::lift(arg0 as u32 as usize).get(),
+                    );
+                    let ptr1 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+                    let vec2 = (result0).into_boxed_slice();
+                    let ptr2 = vec2.as_ptr().cast::<u8>();
+                    let len2 = vec2.len();
+                    ::core::mem::forget(vec2);
+                    *ptr1.add(4).cast::<usize>() = len2;
+                    *ptr1.add(0).cast::<*mut u8>() = ptr2.cast_mut();
+                    ptr1
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn __post_return_method_hasher_finalize<T: GuestHasher>(
+                    arg0: *mut u8,
+                ) {
+                    let l0 = *arg0.add(0).cast::<*mut u8>();
+                    let l1 = *arg0.add(4).cast::<usize>();
+                    let base2 = l0;
+                    let len2 = l1;
+                    _rt::cabi_dealloc(base2, len2 * 1, 1);
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_finalize_and_encode_cabi<
+                    T: GuestHasher,
+                >(arg0: *mut u8) -> *mut u8 {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    let result0 = T::finalize_and_encode(
+                        HasherBorrow::lift(arg0 as u32 as usize).get(),
+                    );
+                    let ptr1 = _RET_AREA.0.as_mut_ptr().cast::<u8>();
+                    let vec2 = (result0.into_bytes()).into_boxed_slice();
+                    let ptr2 = vec2.as_ptr().cast::<u8>();
+                    let len2 = vec2.len();
+                    ::core::mem::forget(vec2);
+                    *ptr1.add(4).cast::<usize>() = len2;
+                    *ptr1.add(0).cast::<*mut u8>() = ptr2.cast_mut();
+                    ptr1
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn __post_return_method_hasher_finalize_and_encode<
+                    T: GuestHasher,
+                >(arg0: *mut u8) {
+                    let l0 = *arg0.add(0).cast::<*mut u8>();
+                    let l1 = *arg0.add(4).cast::<usize>();
+                    _rt::cabi_dealloc(l0, l1, 1);
+                }
+                #[doc(hidden)]
+                #[allow(non_snake_case)]
+                pub unsafe fn _export_method_hasher_reset_cabi<T: GuestHasher>(
+                    arg0: *mut u8,
+                ) {
+                    #[cfg(target_arch = "wasm32")] _rt::run_ctors_once();
+                    T::reset(HasherBorrow::lift(arg0 as u32 as usize).get());
+                }
+                pub trait Guest {
+                    type Hasher: GuestHasher;
+                }
+                pub trait GuestHasher: 'static {
+                    #[doc(hidden)]
+                    unsafe fn _resource_new(val: *mut u8) -> u32
+                    where
+                        Self: Sized,
+                    {
+                        #[cfg(not(target_arch = "wasm32"))]
+                        {
+                            let _ = val;
+                            unreachable!();
+                        }
+                        #[cfg(target_arch = "wasm32")]
+                        {
+                            #[link(
+                                wasm_import_module = "[export]component:aws-wasm-checksums/sha1-hasher"
+                            )]
+                            extern "C" {
+                                #[link_name = "[resource-new]hasher"]
+                                fn new(_: *mut u8) -> u32;
+                            }
+                            new(val)
+                        }
+                    }
+                    #[doc(hidden)]
+                    fn _resource_rep(handle: u32) -> *mut u8
+                    where
+                        Self: Sized,
+                    {
+                        #[cfg(not(target_arch = "wasm32"))]
+                        {
+                            let _ = handle;
+                            unreachable!();
+                        }
+                        #[cfg(target_arch = "wasm32")]
+                        {
+                            #[link(
+                                wasm_import_module = "[export]component:aws-wasm-checksums/sha1-hasher"
+                            )]
+                            extern "C" {
+                                #[link_name = "[resource-rep]hasher"]
+                                fn rep(_: u32) -> *mut u8;
+                            }
+                            unsafe { rep(handle) }
+                        }
+                    }
+                    fn new() -> Self;
+                    fn update(&self, input: _rt::Vec<u8>);
+                    fn finalize(&self) -> _rt::Vec<u8>;
+                    fn finalize_and_encode(&self) -> _rt::String;
+                    fn reset(&self);
+                }
+                #[doc(hidden)]
+                macro_rules! __export_component_aws_wasm_checksums_sha1_hasher_cabi {
+                    ($ty:ident with_types_in $($path_to_types:tt)*) => {
+                        const _ : () = { #[export_name =
+                        "component:aws-wasm-checksums/sha1-hasher#[constructor]hasher"]
+                        unsafe extern "C" fn export_constructor_hasher() -> i32 {
+                        $($path_to_types)*:: _export_constructor_hasher_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > () } #[export_name =
+                        "component:aws-wasm-checksums/sha1-hasher#[method]hasher.update"]
+                        unsafe extern "C" fn export_method_hasher_update(arg0 : * mut u8,
+                        arg1 : * mut u8, arg2 : usize,) { $($path_to_types)*::
+                        _export_method_hasher_update_cabi::<<$ty as $($path_to_types)*::
+                        Guest >::Hasher > (arg0, arg1, arg2) } #[export_name =
+                        "component:aws-wasm-checksums/sha1-hasher#[method]hasher.finalize"]
+                        unsafe extern "C" fn export_method_hasher_finalize(arg0 : * mut
+                        u8,) -> * mut u8 { $($path_to_types)*::
+                        _export_method_hasher_finalize_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "cabi_post_component:aws-wasm-checksums/sha1-hasher#[method]hasher.finalize"]
+                        unsafe extern "C" fn _post_return_method_hasher_finalize(arg0 : *
+                        mut u8,) { $($path_to_types)*::
+                        __post_return_method_hasher_finalize::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "component:aws-wasm-checksums/sha1-hasher#[method]hasher.finalize-and-encode"]
+                        unsafe extern "C" fn
+                        export_method_hasher_finalize_and_encode(arg0 : * mut u8,) -> *
+                        mut u8 { $($path_to_types)*::
+                        _export_method_hasher_finalize_and_encode_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "cabi_post_component:aws-wasm-checksums/sha1-hasher#[method]hasher.finalize-and-encode"]
+                        unsafe extern "C" fn
+                        _post_return_method_hasher_finalize_and_encode(arg0 : * mut u8,)
+                        { $($path_to_types)*::
+                        __post_return_method_hasher_finalize_and_encode::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } #[export_name =
+                        "component:aws-wasm-checksums/sha1-hasher#[method]hasher.reset"]
+                        unsafe extern "C" fn export_method_hasher_reset(arg0 : * mut u8,)
+                        { $($path_to_types)*:: _export_method_hasher_reset_cabi::<<$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (arg0) } const _ : () = {
+                        #[doc(hidden)] #[export_name =
+                        "component:aws-wasm-checksums/sha1-hasher#[dtor]hasher"]
+                        #[allow(non_snake_case)] unsafe extern "C" fn dtor(rep : * mut
+                        u8) { $($path_to_types)*:: Hasher::dtor::< <$ty as
+                        $($path_to_types)*:: Guest >::Hasher > (rep) } }; };
+                    };
+                }
+                #[doc(hidden)]
+                pub(crate) use __export_component_aws_wasm_checksums_sha1_hasher_cabi;
+                #[repr(align(4))]
+                struct _RetArea([::core::mem::MaybeUninit<u8>; 8]);
+                static mut _RET_AREA: _RetArea = _RetArea(
+                    [::core::mem::MaybeUninit::uninit(); 8],
+                );
+            }
         }
     }
 }
@@ -1304,7 +2071,13 @@ macro_rules! __export_checksums_impl {
         exports::component::aws_wasm_checksums::crc32_hasher); $($path_to_types_root)*::
         exports::component::aws_wasm_checksums::crc32c_hasher::__export_component_aws_wasm_checksums_crc32c_hasher_cabi!($ty
         with_types_in $($path_to_types_root)*::
-        exports::component::aws_wasm_checksums::crc32c_hasher);
+        exports::component::aws_wasm_checksums::crc32c_hasher); $($path_to_types_root)*::
+        exports::component::aws_wasm_checksums::sha256_hasher::__export_component_aws_wasm_checksums_sha256_hasher_cabi!($ty
+        with_types_in $($path_to_types_root)*::
+        exports::component::aws_wasm_checksums::sha256_hasher); $($path_to_types_root)*::
+        exports::component::aws_wasm_checksums::sha1_hasher::__export_component_aws_wasm_checksums_sha1_hasher_cabi!($ty
+        with_types_in $($path_to_types_root)*::
+        exports::component::aws_wasm_checksums::sha1_hasher);
     };
 }
 #[doc(inline)]
@@ -1312,31 +2085,43 @@ pub(crate) use __export_checksums_impl as export;
 #[cfg(target_arch = "wasm32")]
 #[link_section = "component-type:wit-bindgen:0.36.0:component:aws-wasm-checksums:checksums:encoded world"]
 #[doc(hidden)]
-pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 1146] = *b"\
-\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07\xfa\x07\x01A\x02\x01\
-A\x0f\x01p}\x01@\x01\x05input\0\0\0\x04\0\x0fcrc64-nvme-hash\x01\x01\x01@\x01\x05\
+pub static __WIT_BINDGEN_COMPONENT_TYPE: [u8; 1762] = *b"\
+\0asm\x0d\0\x01\0\0\x19\x16wit-component-encoding\x04\0\x07\xe2\x0c\x01A\x02\x01\
+A\x17\x01p}\x01@\x01\x05input\0\0\0\x04\0\x0fcrc64-nvme-hash\x01\x01\x01@\x01\x05\
 input\0\0s\x04\0\x1acrc64-nvme-hash-and-encode\x01\x02\x04\0\x0acrc32-hash\x01\x01\
 \x04\0\x15crc32-hash-and-encode\x01\x02\x04\0\x0bcrc32c-hash\x01\x01\x04\0\x16cr\
-c32c-hash-and-encode\x01\x02\x01B\x0e\x04\0\x06hasher\x03\x01\x01i\0\x01@\0\0\x01\
-\x04\0\x13[constructor]hasher\x01\x02\x01h\0\x01p}\x01@\x02\x04self\x03\x05input\
-\x04\x01\0\x04\0\x15[method]hasher.update\x01\x05\x01@\x01\x04self\x03\0\x04\x04\
-\0\x17[method]hasher.finalize\x01\x06\x01@\x01\x04self\x03\0s\x04\0\"[method]has\
-her.finalize-and-encode\x01\x07\x01@\x01\x04self\x03\x01\0\x04\0\x14[method]hash\
-er.reset\x01\x08\x04\0.component:aws-wasm-checksums/crc64-nvme-hasher\x05\x03\x01\
-B\x0e\x04\0\x06hasher\x03\x01\x01i\0\x01@\0\0\x01\x04\0\x13[constructor]hasher\x01\
-\x02\x01h\0\x01p}\x01@\x02\x04self\x03\x05input\x04\x01\0\x04\0\x15[method]hashe\
-r.update\x01\x05\x01@\x01\x04self\x03\0\x04\x04\0\x17[method]hasher.finalize\x01\
-\x06\x01@\x01\x04self\x03\0s\x04\0\"[method]hasher.finalize-and-encode\x01\x07\x01\
-@\x01\x04self\x03\x01\0\x04\0\x14[method]hasher.reset\x01\x08\x04\0)component:aw\
-s-wasm-checksums/crc32-hasher\x05\x04\x01B\x0e\x04\0\x06hasher\x03\x01\x01i\0\x01\
-@\0\0\x01\x04\0\x13[constructor]hasher\x01\x02\x01h\0\x01p}\x01@\x02\x04self\x03\
-\x05input\x04\x01\0\x04\0\x15[method]hasher.update\x01\x05\x01@\x01\x04self\x03\0\
-\x04\x04\0\x17[method]hasher.finalize\x01\x06\x01@\x01\x04self\x03\0s\x04\0\"[me\
-thod]hasher.finalize-and-encode\x01\x07\x01@\x01\x04self\x03\x01\0\x04\0\x14[met\
-hod]hasher.reset\x01\x08\x04\0*component:aws-wasm-checksums/crc32c-hasher\x05\x05\
-\x04\0&component:aws-wasm-checksums/checksums\x04\0\x0b\x0f\x01\0\x09checksums\x03\
-\0\0\0G\x09producers\x01\x0cprocessed-by\x02\x0dwit-component\x070.220.1\x10wit-\
-bindgen-rust\x060.36.0";
+c32c-hash-and-encode\x01\x02\x04\0\x0bsha256-hash\x01\x01\x04\0\x16sha256-hash-a\
+nd-encode\x01\x02\x04\0\x09sha1-hash\x01\x01\x04\0\x14sha1-hash-and-encode\x01\x02\
+\x01B\x0e\x04\0\x06hasher\x03\x01\x01i\0\x01@\0\0\x01\x04\0\x13[constructor]hash\
+er\x01\x02\x01h\0\x01p}\x01@\x02\x04self\x03\x05input\x04\x01\0\x04\0\x15[method\
+]hasher.update\x01\x05\x01@\x01\x04self\x03\0\x04\x04\0\x17[method]hasher.finali\
+ze\x01\x06\x01@\x01\x04self\x03\0s\x04\0\"[method]hasher.finalize-and-encode\x01\
+\x07\x01@\x01\x04self\x03\x01\0\x04\0\x14[method]hasher.reset\x01\x08\x04\0.comp\
+onent:aws-wasm-checksums/crc64-nvme-hasher\x05\x03\x01B\x0e\x04\0\x06hasher\x03\x01\
+\x01i\0\x01@\0\0\x01\x04\0\x13[constructor]hasher\x01\x02\x01h\0\x01p}\x01@\x02\x04\
+self\x03\x05input\x04\x01\0\x04\0\x15[method]hasher.update\x01\x05\x01@\x01\x04s\
+elf\x03\0\x04\x04\0\x17[method]hasher.finalize\x01\x06\x01@\x01\x04self\x03\0s\x04\
+\0\"[method]hasher.finalize-and-encode\x01\x07\x01@\x01\x04self\x03\x01\0\x04\0\x14\
+[method]hasher.reset\x01\x08\x04\0)component:aws-wasm-checksums/crc32-hasher\x05\
+\x04\x01B\x0e\x04\0\x06hasher\x03\x01\x01i\0\x01@\0\0\x01\x04\0\x13[constructor]\
+hasher\x01\x02\x01h\0\x01p}\x01@\x02\x04self\x03\x05input\x04\x01\0\x04\0\x15[me\
+thod]hasher.update\x01\x05\x01@\x01\x04self\x03\0\x04\x04\0\x17[method]hasher.fi\
+nalize\x01\x06\x01@\x01\x04self\x03\0s\x04\0\"[method]hasher.finalize-and-encode\
+\x01\x07\x01@\x01\x04self\x03\x01\0\x04\0\x14[method]hasher.reset\x01\x08\x04\0*\
+component:aws-wasm-checksums/crc32c-hasher\x05\x05\x01B\x0e\x04\0\x06hasher\x03\x01\
+\x01i\0\x01@\0\0\x01\x04\0\x13[constructor]hasher\x01\x02\x01h\0\x01p}\x01@\x02\x04\
+self\x03\x05input\x04\x01\0\x04\0\x15[method]hasher.update\x01\x05\x01@\x01\x04s\
+elf\x03\0\x04\x04\0\x17[method]hasher.finalize\x01\x06\x01@\x01\x04self\x03\0s\x04\
+\0\"[method]hasher.finalize-and-encode\x01\x07\x01@\x01\x04self\x03\x01\0\x04\0\x14\
+[method]hasher.reset\x01\x08\x04\0*component:aws-wasm-checksums/sha256-hasher\x05\
+\x06\x01B\x0e\x04\0\x06hasher\x03\x01\x01i\0\x01@\0\0\x01\x04\0\x13[constructor]\
+hasher\x01\x02\x01h\0\x01p}\x01@\x02\x04self\x03\x05input\x04\x01\0\x04\0\x15[me\
+thod]hasher.update\x01\x05\x01@\x01\x04self\x03\0\x04\x04\0\x17[method]hasher.fi\
+nalize\x01\x06\x01@\x01\x04self\x03\0s\x04\0\"[method]hasher.finalize-and-encode\
+\x01\x07\x01@\x01\x04self\x03\x01\0\x04\0\x14[method]hasher.reset\x01\x08\x04\0(\
+component:aws-wasm-checksums/sha1-hasher\x05\x07\x04\0&component:aws-wasm-checks\
+ums/checksums\x04\0\x0b\x0f\x01\0\x09checksums\x03\0\0\0G\x09producers\x01\x0cpr\
+ocessed-by\x02\x0dwit-component\x070.220.1\x10wit-bindgen-rust\x060.36.0";
 #[inline(never)]
 #[doc(hidden)]
 pub fn __link_custom_section_describing_imports() {

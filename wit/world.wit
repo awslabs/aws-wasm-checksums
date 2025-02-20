@@ -30,6 +30,26 @@ interface crc32c-hasher {
     }
 }
 
+interface sha256-hasher {
+    resource hasher {
+        constructor();
+        update: func(input: list<u8>);
+        finalize: func() -> list<u8>;
+        finalize-and-encode: func() -> string;
+        reset: func();
+    }
+}
+
+interface sha1-hasher {
+    resource hasher {
+        constructor();
+        update: func(input: list<u8>);
+        finalize: func() -> list<u8>;
+        finalize-and-encode: func() -> string;
+        reset: func();
+    }
+}
+
 /// A world exporting various hashing functionality. For each supported checksum
 /// there is an exported interface containing a `hasher` resource that allows
 /// incrementally building up and creating a checksum and a single function that
@@ -46,4 +66,13 @@ world checksums {
     export crc32c-hasher;
     export crc32c-hash: func(input: list<u8>) -> list<u8>;
     export crc32c-hash-and-encode: func(input: list<u8>) -> string;
+
+    export sha256-hasher;
+    export sha256-hash: func(input: list<u8>) -> list<u8>;
+    export sha256-hash-and-encode: func(input: list<u8>) -> string;
+
+    export sha1-hasher;
+    export sha1-hash: func(input: list<u8>) -> list<u8>;
+    export sha1-hash-and-encode: func(input: list<u8>) -> string;
+
 }

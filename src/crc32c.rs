@@ -30,7 +30,7 @@ impl GuestCrc32cHasher for Crc32cHasher {
     }
 
     fn update(&self, input: Vec<u8>) {
-        self.hasher.borrow_mut().write(&input.as_slice());
+        self.hasher.borrow_mut().write(input.as_slice());
     }
 
     /// Take the inner hasher, finalize it, and replace it with a freshly initialized one
