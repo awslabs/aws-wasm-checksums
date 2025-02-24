@@ -1,6 +1,7 @@
 .vscode/
 node_modules/
 js-bindings/ 
+.DS_Store
 
 # Added by cargo
 
