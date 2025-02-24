@@ -2,6 +2,7 @@
 node_modules/
 js-bindings/ 
 .DS_Store
+dist/
 
 # Added by cargo
 
