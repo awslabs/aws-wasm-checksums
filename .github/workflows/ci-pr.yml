@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 22.x
       - name: Installing dependencies
-        run: npm install && cargo install cargo-component
+        run: npm install && npx playwright install --with-deps && cargo install cargo-component
       - name: Building Rust code and JS bindings
         run: npm run build
       - name: Linting Rust code

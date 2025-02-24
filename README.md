@@ -11,6 +11,7 @@ To build the project run:
 ```sh
 npm install
 cargo install cargo-component
+npx vitest init browser
 npm run build
 ```
 

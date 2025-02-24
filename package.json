@@ -6,12 +6,15 @@
   "scripts": {
     "test": "vitest --run",
     "build-js-bindings": "cargo component build --release && npx jco transpile ./target/wasm32-wasip1/release/aws_wasm_checksums.wasm -o ./js-bindings/ --no-namespaced-exports",
-    "build": "npm run build-js-bindings"
+    "build": "npm run build-js-bindings",
+    "test:browser": "vitest"
   },
   "author": "landonxjames",
   "license": "Apache-2.0",
   "devDependencies": {
     "@bytecodealliance/jco": "^1.9.1",
+    "@vitest/browser": "^3.0.6",
+    "playwright": "^1.50.1",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
   },
