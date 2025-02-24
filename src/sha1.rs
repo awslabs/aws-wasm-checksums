@@ -4,27 +4,28 @@
  */
 
 use crate::{
-    bindings::exports::component::aws_wasm_checksums::crc32_hasher::{
-        Guest as Crc32HasherType, GuestHasher as GuestCrc32Hasher,
+    bindings::exports::component::aws_wasm_checksums::sha1_hasher::{
+        Guest as Sha1HasherType, GuestHasher as GuestSha1Hasher,
     },
     AwsWasmChecksumsComponent,
 };
 use base64::prelude::BASE64_STANDARD;
 use base64::Engine;
+use sha1::Digest;
 use std::cell::RefCell;
 
-impl Crc32HasherType for AwsWasmChecksumsComponent {
-    type Hasher = Crc32Hasher;
+impl Sha1HasherType for AwsWasmChecksumsComponent {
+    type Hasher = Sha1Hasher;
 }
 
-pub(crate) struct Crc32Hasher {
-    hasher: RefCell<crc32fast::Hasher>,
+pub(crate) struct Sha1Hasher {
+    hasher: RefCell<sha1::Sha1>,
 }
 
-impl GuestCrc32Hasher for Crc32Hasher {
+impl GuestSha1Hasher for Sha1Hasher {
     fn new() -> Self {
         Self {
-            hasher: RefCell::new(crc32fast::Hasher::new()),
+            hasher: RefCell::new(sha1::Sha1::new()),
         }
     }
 
@@ -35,7 +36,7 @@ impl GuestCrc32Hasher for Crc32Hasher {
     /// Take the inner hasher, finalize it, and replace it with a freshly initialized one
     /// so this resource can be reused.
     fn finalize(&self) -> Vec<u8> {
-        self.hasher.take().finalize().to_be_bytes().to_vec()
+        self.hasher.take().finalize().to_vec()
     }
 
     fn reset(&self) {
@@ -43,7 +44,7 @@ impl GuestCrc32Hasher for Crc32Hasher {
     }
 
     fn finalize_and_encode(&self) -> String {
-        let output = self.hasher.take().finalize().to_be_bytes();
+        let output = self.hasher.take().finalize();
         BASE64_STANDARD.encode(output)
     }
 }
