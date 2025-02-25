@@ -1,1 +1,1 @@
-export * from "./js-bindings/aws_wasm_checksums";
+export * from "./js-bindings/aws_wasm_checksums.js";
