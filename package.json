@@ -10,13 +10,14 @@
     "url": "git+https://github.com/awslabs/aws-wasm-checksums.git"
   },
   "exports": [
-    "./dist/index.js"
+    "./index.js"
   ],
   "scripts": {
     "test": "vitest --run",
     "build-js-bindings": "cargo component build --release && npx jco transpile ./target/wasm32-wasip1/release/aws_wasm_checksums.wasm -o ./js-bindings/ --no-namespaced-exports",
     "copy-js-bindings": "cp -r js-bindings dist/",
-    "build": "npm run build-js-bindings && npx tsc && npm run copy-js-bindings",
+    "copy-package-json": "cp ./package.json dist/",
+    "build": "npm run build-js-bindings && npx tsc && npm run copy-js-bindings && npm run copy-package-json",
     "test:browser": "vitest"
   },
   "files": [
