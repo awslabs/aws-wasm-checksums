@@ -1,0 +1,25 @@
+name: Publish to NPM
+# Eventually we want this to run when a new release is cut, but temporarily
+# making it manual for testing purposes
+# on:
+#   release:
+#     types: [created]
+on:
+  workflow_call:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "22.x"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install dependencies and build 🔧
+        run: npm install && npm run build
+      - name: Publish package
+        run: npm publish --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AWS_WASM_CHECKSUMS_PUBLISH }}
