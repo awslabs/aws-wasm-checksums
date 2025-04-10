@@ -22,6 +22,6 @@ jobs:
       - name: Build package
         run: npm run build
       - name: Publish package
-        run: npm publish --dry-run
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AWS_WASM_CHECKSUMS_PUBLISH }}
