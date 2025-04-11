@@ -17,11 +17,12 @@ jobs:
         with:
           node-version: "22.x"
           registry-url: "https://registry.npmjs.org"
+          token: ${{ secrets.NPM_AWS_WASM_CHECKSUMS_PUBLISH }}
       - name: Install dependencies
         run: npm install && cargo install cargo-component
       - name: Build package
         run: npm run build
       - name: Publish package
-        run: npm publish
+        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AWS_WASM_CHECKSUMS_PUBLISH }}
